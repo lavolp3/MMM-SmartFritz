@@ -1,0 +1,63 @@
+<div class="smartfritz-wrapper">
+
+  {% if loading %}
+
+    <div class="smartfritz dimmed light small">{{ loading | safe }}</div>
+
+  {% else %}
+
+    {# ------------- Fritz HEADER  -------------- #}
+    <div class="smartfritz fritz-header">
+      <h2>FRITZ-BOX</h2>
+        <div class="smartfritz osversion">OS version: {{ osversion }}</div>
+      {% if config.showLEDSwitch %}
+        <div class="smartfritz ledState">LED States:
+          <label class="switch ledSwitchAM">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <label class="switch ledSwitchOnOff">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      {% endif %}
+    </div>
+
+    {# ------------- Thermostats  -------------- #}
+    {% if config.showThermostats %}
+      <div class="smartfritz thermostats-wrapper">
+        {% for i in range(0, thermostats.length) %}
+          {% set t = thermostats[i] %}
+          <table class="thermostats-container">
+            <tr>
+              <th class="thermostats-header" colspan="2">
+                {{ t.name }}<br/>
+                <span class="small">{{ t.battery }}%</span>
+              </th>
+            </tr>
+            <tr>
+              <td class="" rowspan="3">
+                <div class="thermostats-isTemp bold">{{ t.isTemp }}<sup>°C</sup></div>
+              </td>
+              <td class="thermostats-arrow thermostats-up dimmed" onclick="{{ 0.5 | setThermostat(i) }}">&#9651;</td>
+            </tr>
+            <tr>
+              <td class="thermostats-setTemp">{{ t.setTemp }}</td>
+            </tr>
+            <tr>
+              <td class="thermostats-arrow thermostats-down dimmed" onclick="{{ -0.5 | setThermostat(i) }}">&#9661;</td>
+            </tr>
+            <tr>
+              <td class="thermostats-footer small" colspan="2">Nächste Änderung: <br/>
+                {{ t.nextChange }}, {{t.nextTemp}}
+              </td>
+            </tr>
+          </table>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {# ------------- Phone calls  -------------- #}
+  {% endif %}
+</div>

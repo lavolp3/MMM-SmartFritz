@@ -1,0 +1,16 @@
+{
+  "name": "mmm-fritzapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "MMM-FritzAPI.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "csv": "^5.3.1",
+    "fritzapi": "^0.10.7",
+    "highcharts": "^8.2.2"
+  }
+}
